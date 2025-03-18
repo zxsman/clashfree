@@ -41,7 +41,7 @@ jobs:
     - name: Convert Simplified Chinese to Traditional Chinese
       run: |
         opencc -i clash.yml -o clash_traditional.yml -c s2t.json
-        mv clash_traditional.yml clash.yml
+        mv clash_traditional.yml clash2.yml
 
     - name: Commit and push changes
       run: |
