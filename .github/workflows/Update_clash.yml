@@ -1,0 +1,44 @@
+name: Update Clash File
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 * * * *'
+
+jobs:
+  update_file:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Git
+      run: |
+        git config --local user.email "chuangyustar@gmail.com"
+        git config --local user.name "zxsman"
+
+    - name: Fetch upstream changes
+      run: |
+        git remote add upstream https://github.com/aiboboxx/clashfree.git
+        git fetch upstream
+        git checkout main  
+        git merge upstream/main || echo "Merge conflicts detected, resolving..."
+
+    - name: Download clash.yml
+      run: |
+        curl -o clash.yml https://raw.githubusercontent.com/aiboboxx/clashfree/main/clash.yml
+
+    - name: Replace 🇨🇳 with 🇹🇼
+      run: |
+        sed -i 's/🇨🇳/🇹🇼/g' clash.yml
+
+    - name: Commit and push changes
+      run: |
+        git add clash.yml
+        git commit -m "Update clash.yml" || echo "No changes to commit"
+        
+        # Push changes to the repository
+        git push origin main
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
