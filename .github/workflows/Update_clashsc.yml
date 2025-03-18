@@ -1,4 +1,4 @@
-name: Update Clash File
+name: Update Clashsc File
 
 on:
   workflow_dispatch:
@@ -31,12 +31,12 @@ jobs:
 
     - name: Replace 🇨🇳 with 🇹🇼
       run: |
-        sed -i 's/🇨🇳/🇹🇼/g' clash.yml
+        sed -i 's/🇨🇳/🇹🇼/g' clashsc.yml
 
     - name: Commit and push changes
       run: |
-        git add clash.yml
-        git commit -m "Update clash.yml" || echo "No changes to commit"
+        git add clashsc.yml
+        git commit -m "Update clashsc.yml" || echo "No changes to commit"
         
         # Push changes to the repository
         git push origin main
