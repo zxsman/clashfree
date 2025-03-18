@@ -31,7 +31,8 @@ jobs:
 
     - name: Replace 🇨🇳 with 🇹🇼
       run: |
-        sed -i 's/🇨🇳/🇹🇼/g' clashsc.yml
+        sed -i 's/🇨🇳/🇹🇼/g' clash.yml
+        cp clash.yml clashsc.yml  # 生成 clashsc.yml 文件
 
     - name: Commit and push changes
       run: |
