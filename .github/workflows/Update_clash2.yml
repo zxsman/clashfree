@@ -1,4 +1,4 @@
-name: Update Clash2 File
+name: Update Clashtc File
 
 on:
   workflow_dispatch:
@@ -41,12 +41,12 @@ jobs:
     - name: Convert Simplified Chinese to Traditional Chinese
       run: |
         opencc -i clash.yml -o clash_traditional.yml -c s2t.json
-        mv clash_traditional.yml clash2.yml
+        mv clash_traditional.yml clashtc.yml
 
     - name: Commit and push changes
       run: |
-        git add clash2.yml
-        git commit -m "Update clash2.yml" || echo "No changes to commit"
+        git add clashtc.yml
+        git commit -m "Update clashtc.yml" || echo "No changes to commit"
         
         # Push changes to the repository
         git push origin main
