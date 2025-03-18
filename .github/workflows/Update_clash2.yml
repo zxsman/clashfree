@@ -1,4 +1,4 @@
-name: Update Clash File
+name: Update Clash2 File
 
 on:
   workflow_dispatch:
