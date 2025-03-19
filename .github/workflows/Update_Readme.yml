@@ -2,8 +2,8 @@ name: Update README
 
 on:
   schedule:
-    - cron: '0 * * * *'  # 每小时运行一次
-  workflow_dispatch:  # 允许手动触发
+    - cron: '0 * * * *'
+  workflow_dispatch:
 
 jobs:
   update-readme:
@@ -17,9 +17,9 @@ jobs:
         run: |
           curl -s https://raw.githubusercontent.com/aiboboxx/clashfree/refs/heads/main/README.md | head -n 1 > temp.txt
 
-      - name: Update README.md
+      - name: Extract date and time
         run: |
-          TIME=$(cat temp.txt)
+          TIME=$(grep -oP '\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}' temp.txt)
           echo "$TIME" > README.md
 
       - name: Commit changes
