@@ -13,11 +13,6 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Set up Git
-      run: |
-        git config --local user.email "chuangyustar@gmail.com"
-        git config --local user.name "zxsman"
-
     - name: Fetch upstream changes
       run: |
         git remote add upstream https://github.com/aiboboxx/clashfree.git
@@ -32,7 +27,7 @@ jobs:
     - name: Replace 🇨🇳 with 🇹🇼
       run: |
         sed -i 's/🇨🇳/🇹🇼/g' clash.yml
-        cp clash.yml clashsc.yml  # 生成 clashsc.yml 文件
+        cp clash.yml clashsc.yml
 
     - name: Commit and push changes
       run: |
