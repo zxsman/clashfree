@@ -10,20 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: 檢出代碼庫
       uses: actions/checkout@v2
 
-    - name: Set up Git
+    - name: 設置 Git
       run: |
         git config --local user.email "chuangyustar@gmail.com"
         git config --local user.name "zxsman"
 
-    - name: Fetch upstream changes
+    - name: 獲取上游更改
       run: |
         git remote add upstream https://github.com/aiboboxx/clashfree.git
         git fetch upstream
         git checkout main  
-        git pull upstream main
+        git pull --no-rebase upstream main  # 使用合併策略
 
     - name: 顯示修改前的 README.md
       run: cat README.md
@@ -41,11 +41,12 @@ jobs:
     - name: 顯示修改後的 README.md
       run: cat README.md
 
-    - name: 提交推送並修改
+    - name: 提交並推送更改
       run: |
         git add README.md
         git commit -m "更新日期" || echo "沒有更改需要提交"
         
+        # 推送更改到倉庫
         git push origin main
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
